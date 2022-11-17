@@ -49,6 +49,7 @@ public class Main {
 
         System.out.println("Program still running!");
         NewStudent.printStudents();
+        NewStudent.printHonorStudents();
 //        school.Student student1 = new Student("Tommy");
 //        Student student2 = new Student("Chuckie", 3.0);
 //        Student student3 = new Student("Lillian", 2.9);

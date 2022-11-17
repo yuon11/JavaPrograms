@@ -10,13 +10,14 @@ public class NewStudent {
     private String name;
     private double gpa;
     private ArrayList<String> courses;
+    private boolean isOnHonorRoll;
     public static ArrayList<NewStudent> StudentDirectory = new ArrayList();
-    public boolean isOnHonorRoll;
+
 
     //
     // Initializers
     //
-    public NewStudent (String stdName) {
+    public NewStudent(String stdName) {
         setGpa(0.0);
         this.name = stdName;
         this.courses = new ArrayList();
@@ -24,7 +25,7 @@ public class NewStudent {
     }
 
     // Just GPA and name
-    public NewStudent (String stdName, double GPA) {
+    public NewStudent(String stdName, double GPA) {
 
         setGpa(GPA);
         setName(stdName);
@@ -33,7 +34,7 @@ public class NewStudent {
     }
 
     // intitialize students with all attributes
-    public NewStudent (String stdName, double GPA, String ... courses) {
+    public NewStudent(String stdName, double GPA, String... courses) {
 
         setGpa(GPA);
         setName(stdName);
@@ -42,7 +43,7 @@ public class NewStudent {
     }
 
     // intitialize students with all attributes
-    public NewStudent (String stdName, double GPA, ArrayList<String> courses) {
+    public NewStudent(String stdName, double GPA, ArrayList<String> courses) {
 
         setGpa(GPA);
         setName(stdName);
@@ -57,7 +58,7 @@ public class NewStudent {
 
         if (name != null && name.length() > 0) {
             this.name = name;
-        }else {
+        } else {
             throw new IllegalArgumentException("Bad name for Student");
         }
     }
@@ -77,10 +78,11 @@ public class NewStudent {
         if (gpa <= 4.0 && gpa >= 0.0) {
             this.gpa = gpa;
             setOnHonorRoll();
-        }else {
+        } else {
             throw new IllegalArgumentException("Bad GPA for Student");
         }
     }
+
     //
     //
     //
@@ -94,7 +96,8 @@ public class NewStudent {
     public void setCourses(ArrayList<String> courses) {
         this.courses = courses;
     }
-    public void setCourses(String ... courses) {
+
+    public void setCourses(String... courses) {
         this.courses = new ArrayList<String>(Arrays.asList(courses));
     }
 
@@ -116,7 +119,7 @@ public class NewStudent {
     public void addCourse(String courseName) {
         if (this.courses != null && courseName != null && courseName.length() > 0) {
             this.courses.add(courseName);
-        }else {
+        } else {
             throw new IllegalArgumentException("Cant add course to student course list");
         }
     }
@@ -133,18 +136,33 @@ public class NewStudent {
                 '}';
     }
 
+    public boolean getOnHonorRoll() {
+        return this.isOnHonorRoll;
+    }
+
     private void setOnHonorRoll() {
         if (this.gpa >= 3.0) {
-            this.isOnHonorRoll=true;
-        }else {
-            this.isOnHonorRoll=false;
+            this.isOnHonorRoll = true;
+        } else {
+            this.isOnHonorRoll = false;
         }
     }
 
-    public static void printStudents(){
-        for (NewStudent student: StudentDirectory) {
+    public static void printStudents() {
+        for (NewStudent student : StudentDirectory) {
             System.out.println(student.toString());
         }
     }
+
+    public static void printHonorStudents() {
+        System.out.println("\n------------------HONOR ROLL STUDENTS--------------------");
+        for (NewStudent student : StudentDirectory) {
+            if (student.getOnHonorRoll()) {
+                System.out.println(student.toString());
+            }
+        }
+        System.out.println("\n------------------HONOR ROLL STUDENTS--------------------");
+    }
+
 
 }
